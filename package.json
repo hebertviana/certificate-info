@@ -1,0 +1,76 @@
+{
+  "name": "certificate-info",
+  "displayName": "certificate-info",
+  "description": "O Certificate Info é uma extensão para o Visual Studio Code que simplifica a visualização e análise de certificados digitais, chaves públicas e CSRs diretamente no seu editor.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hebertviana/certificate-info.git"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "certificate.preview",
+        "displayName": "Certificate Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.cer",
+            "scheme": "certificate-preview"
+          },
+          {
+            "filenamePattern": "*.csr",
+            "scheme": "certificate-preview"
+          }
+        ],
+        "icon": "src/resources/certificate-award-trophy-svgrepo-com.svg"
+      }
+    ],
+    "commands": [
+      {
+        "command": "certificate-info.showDetails",
+        "title": "Exibir Informações do Certificado/Chave/CSR",
+        "category": "Certificate Info",
+        "icon": {
+          "light": "src/resources/certificate-award-trophy-svgrepo-com.svg",
+          "dark": "src/resources/certificate-award-trophy-svgrepo-com.svg"
+        }
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "certificate-info.showDetails",
+          "when": "resourceExtname == .cer || resourceExtname == .csr",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.97.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint": "^9.19.0",
+    "typescript": "^5.7.3",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
